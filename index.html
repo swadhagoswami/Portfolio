@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swadha Goswami — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1208;
+    --warm: #C8A96E;
+    --blush: #D4A8A0;
+    --sage: #8B9E8A;
+    --deep: #2C1F14;
+    --light-warm: #EDE5D4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(245,240,232,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--warm); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    opacity: 0; animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--warm);
+  }
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--deep);
+    opacity: 0.7;
+    max-width: 420px;
+    opacity: 0; animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex; gap: 1.5rem; align-items: center;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    padding: 0.9rem 2.2rem; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .btn-primary:hover { background: var(--warm); }
+  .btn-ghost {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; opacity: 0.5;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: opacity 0.3s;
+  }
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-right {
+    position: relative;
+    background: var(--light-warm);
+    overflow: hidden;
+  }
+  .hero-visual {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-circle {
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--warm) 0%, var(--blush) 50%, var(--sage) 100%);
+    opacity: 0.15;
+    position: absolute;
+  }
+  .hero-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14rem;
+    font-weight: 300;
+    color: var(--warm);
+    opacity: 0.12;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+  .hero-tags {
+    position: absolute; bottom: 3rem; left: 3rem; right: 3rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .tag {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(200,169,110,0.3);
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--deep);
+    backdrop-filter: blur(8px);
+  }
+  .floating-line {
+    position: absolute; top: 3rem; right: 3rem;
+    width: 1px; height: 80px; background: var(--warm); opacity: 0.4;
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 8rem 6rem; }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--warm); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+  .section-title em { font-style: italic; color: var(--warm); }
+
+  /* ABOUT */
+  #about {
+    background: var(--deep);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  #about .section-title { color: var(--cream); }
+  #about .section-label { color: var(--warm); }
+  .about-body {
+    font-size: 1.05rem; line-height: 1.85;
+    color: rgba(245,240,232,0.75);
+  }
+  .about-body p + p { margin-top: 1.2rem; }
+  .skills-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .skill-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(245,240,232,0.55);
+  }
+  .skill-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--warm); flex-shrink: 0;
+  }
+  .about-stats {
+    display: flex; flex-direction: column; gap: 3rem;
+    border-left: 1px solid rgba(200,169,110,0.2);
+    padding-left: 4rem;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300;
+    color: var(--warm);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+    margin-top: 0.4rem;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--cream); }
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(26,18,8,0.1);
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .exp-item:last-child { border-bottom: 1px solid rgba(26,18,8,0.1); }
+  .exp-item:hover { background: rgba(200,169,110,0.05); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+  .exp-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--warm);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+  .exp-org {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--blush); margin-top: 0.3rem;
+  }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 0.75rem;
+  }
+  .exp-desc {
+    font-size: 0.9rem; line-height: 1.75;
+    color: rgba(26,18,8,0.6);
+    max-width: 600px;
+  }
+
+  /* WORK / PROJECTS */
+  #work {
+    background: var(--light-warm);
+    padding-bottom: 4rem;
+  }
+  .work-intro {
+    font-size: 1rem; line-height: 1.8;
+    color: rgba(26,18,8,0.6);
+    max-width: 550px;
+    margin-bottom: 4rem;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--cream);
+    padding: 2.5rem;
+    border: 1px solid rgba(200,169,110,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--warm);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(26,18,8,0.08); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; color: var(--warm);
+    margin-bottom: 1.5rem;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .project-type {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--blush); margin-bottom: 1rem;
+  }
+  .project-desc {
+    font-size: 0.85rem; line-height: 1.7;
+    color: rgba(26,18,8,0.6);
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid rgba(26,18,8,0.2);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .project-link:hover { color: var(--warm); border-color: var(--warm); }
+
+  /* PUBLICATION */
+  #publication {
+    background: var(--deep);
+    padding: 8rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #publication::before {
+    content: '"';
+    position: absolute; top: -2rem; left: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem; color: var(--warm); opacity: 0.05;
+    line-height: 1;
+  }
+  .pub-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .pub-text .section-label { color: var(--warm); }
+  .pub-text .section-title { color: var(--cream); }
+  .pub-desc {
+    font-size: 1rem; line-height: 1.85;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 2rem;
+  }
+  .pub-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic; font-weight: 300;
+    color: var(--warm);
+    line-height: 1.5;
+    border-left: 2px solid var(--warm);
+    padding-left: 1.5rem;
+    margin-top: 2rem;
+  }
+  .pub-visual {
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 3rem;
+    text-align: center;
+  }
+  .pub-title-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300;
+    color: var(--warm);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .pub-subtitle {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+  .pub-divider { width: 40px; height: 1px; background: var(--warm); margin: 1.5rem auto; }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--cream); }
+  .ach-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+    margin-top: 1rem;
+  }
+  .ach-item {
+    padding: 2.5rem;
+    border: 1px solid rgba(26,18,8,0.08);
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    transition: border-color 0.3s;
+  }
+  .ach-item:hover { border-color: var(--warm); }
+  .ach-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--warm); opacity: 0.15;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .ach-icon-wrap {
+    width: 40px; height: 40px; flex-shrink: 0;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .ach-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400;
+    color: var(--ink); margin-bottom: 0.4rem;
+  }
+  .ach-desc {
+    font-size: 0.82rem; line-height: 1.65;
+    color: rgba(26,18,8,0.55);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 8rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::after {
+    content: 'SG';
+    position: absolute; bottom: -4rem; right: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18rem; font-weight: 300;
+    color: rgba(200,169,110,0.04);
+    user-select: none;
+  }
+  .contact-eyebrow { color: var(--warm); margin-bottom: 1rem; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; }
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300; color: var(--cream);
+    line-height: 1.1; margin-bottom: 2rem;
+  }
+  .contact-heading em { font-style: italic; color: var(--warm); }
+  .contact-sub {
+    font-size: 0.95rem; color: rgba(245,240,232,0.5);
+    max-width: 400px; margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+  .contact-link {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    text-decoration: none;
+    transition: transform 0.3s;
+  }
+  .contact-link:hover { transform: translateY(-3px); }
+  .contact-link-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+  }
+  .contact-link-value {
+    font-size: 0.9rem; color: var(--cream);
+    border-bottom: 1px solid rgba(200,169,110,0.4);
+    padding-bottom: 2px;
+  }
+  .contact-link:hover .contact-link-value { color: var(--warm); border-color: var(--warm); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: rgba(26,18,8,0.08); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 2.5rem 3rem; }
+    .hero-right { height: 350px; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-stats { border-left: none; border-top: 1px solid rgba(200,169,110,0.2); padding-left: 0; padding-top: 2rem; flex-direction: row; }
+    section { padding: 5rem 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .pub-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .ach-grid { grid-template-columns: 1fr; }
+    #contact { padding: 5rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Swadha Goswami</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Marketing · Design · Content</p>
+    <h1 class="hero-name">Swadha<br><em>Goswami</em></h1>
+    <p class="hero-tagline" style="opacity:0;animation:fadeUp 1s 0.7s forwards;">
+      Undergraduate at University of Delhi — where storytelling meets strategy. I build brands, design campaigns, and create content that actually moves people.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle"></div>
+      <div class="hero-initials">SG</div>
+    </div>
+    <div class="floating-line"></div>
+    <div class="hero-tags">
+      <span class="tag">Social Media Strategy</span>
+      <span class="tag">Graphic Design</span>
+      <span class="tag">Content Marketing</span>
+      <span class="tag">Brand Building</span>
+      <span class="tag">Visual Storytelling</span>
+      <span class="tag">Event Management</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Ambitious.<br><em>Creative.</em><br>Impact-driven.</h2>
+    <div class="about-body">
+      <p>I'm an ambitious B.Com (Hons) student at Maitreyi College, University of Delhi, specialising in marketing, media, finance, and design. I have a keen eye for visual storytelling and a passion for creating communication that sticks.</p>
+      <p>From founding a jewellery brand to co-authoring a women's leadership magazine, I turn ideas into real things — fast, with intention, and always with heart.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="skill-dot"></span> Canva / Adobe (Basics)</div>
+      <div class="skill-item"><span class="skill-dot"></span> Social Media Strategy</div>
+      <div class="skill-item"><span class="skill-dot"></span> Content Marketing</div>
+      <div class="skill-item"><span class="skill-dot"></span> Brand Building</div>
+      <div class="skill-item"><span class="skill-dot"></span> Photography</div>
+      <div class="skill-item"><span class="skill-dot"></span> Influencer Outreach</div>
+      <div class="skill-item"><span class="skill-dot"></span> Public Speaking</div>
+      <div class="skill-item"><span class="skill-dot"></span> Cross-cultural Collaboration</div>
+    </div>
+  </div>
+  <div class="about-stats reveal">
+    <div>
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Brands Worked With</div>
+    </div>
+    <div>
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Events Managed</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Publication Created</div>
+    </div>
+    <div>
+      <div class="stat-num">96%</div>
+      <div class="stat-label">High School GPA</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">Experience</p>
+  <h2 class="section-title reveal">Where I've<br><em>Created Impact</em></h2>
+  <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">2024 – Present</div>
+        <div class="exp-org">Rotaract Club of Delhi Genesis</div>
+      </div>
+      <div>
+        <div class="exp-role">Public Relations Officer</div>
+        <div class="exp-desc">Managed end-to-end social media for a newly chartered club — content planning, design, and posting. Ran campaigns for projects like Niramaya (health), Project Abaroo (cancer awareness), Heartstrings, and Green Vision. Designed event posters, grids, and reels across 20+ initiatives.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">2024 – Present</div>
+        <div class="exp-org">DuBeat – Delhi University</div>
+      </div>
+      <div>
+        <div class="exp-role">Business Development Intern</div>
+        <div class="exp-desc">Built and maintained client relationships, assisted in pitching media solutions, and coordinated between clients and the content/design team for smooth campaign execution. Helped expand DuBeat's brand partnerships and strengthen its campus presence.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">2024</div>
+        <div class="exp-org">International Education Boutique (IEB)</div>
+      </div>
+      <div>
+        <div class="exp-role">Social Media Manager</div>
+        <div class="exp-desc">Managed end-to-end social media operations — content planning, visual design, and posting. Developed creative campaigns to enhance brand visibility, coordinated student-focused webinars, and ensured consistent brand communication.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">2023 – Present</div>
+        <div class="exp-org">Swavi</div>
+      </div>
+      <div>
+        <div class="exp-role">Co-Founder</div>
+        <div class="exp-desc">Co-founded an artificial jewellery brand with Saanvi Sinha — from scratch. Established the brand identity, managed timelines, developed client partnerships, and set the strategic direction for product launches and market presence.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">2023 – 2024</div>
+        <div class="exp-org">Rotaract Club, Midtown Maitreyi</div>
+      </div>
+      <div>
+        <div class="exp-role">Marketing Sub Head</div>
+        <div class="exp-desc">Led the club as sub head, created eye-catching banners, posters, and social media grids that boosted event attendance and engagement. Developed graphic designs for club events and promotions.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-year">Freelance</div>
+        <div class="exp-org">Nirmana Home · Parul Gandhi · Contrast by Parth</div>
+      </div>
+      <div>
+        <div class="exp-role">Content Creator & Designer</div>
+        <div class="exp-desc">Created reels, stories, and posts for luxury home décor brand Nirmana Home. Shot and created content for high-fashion label Parul Gandhi, and designed promotional material for fashion brand Contrast by Parth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label reveal">Selected Work</p>
+  <h2 class="section-title reveal">Projects &<br><em>Campaigns</em></h2>
+  <p class="work-intro reveal">A selection of campaigns, content, and creative work across social media, graphic design, and brand storytelling.</p>
+
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-type">Social Media · Graphic Design</div>
+      <div class="project-name">Rotaract Club of Delhi Genesis</div>
+      <div class="project-desc">Full social media management for the club's entire rotary year 2025–26 — event posters, Instagram grids, campaign graphics, and member reveals for 20+ events including Niramaya, Project Abaroo, Heartstrings, and Green Vision.</div>
+      <a href="https://www.instagram.com/delhi_genesis" target="_blank" class="project-link">View on Instagram →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-type">Content Creation · Photography</div>
+      <div class="project-name">Nirmana Home</div>
+      <div class="project-desc">Created reels and posts for a luxury home décor brand — product styling, copywriting, and visual storytelling to build brand presence and announce their return after a pause.</div>
+      <a href="https://www.instagram.com/reel/DYT8R9CulYU/" target="_blank" class="project-link">Watch Reel →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-type">Fashion Content · Photography</div>
+      <div class="project-name">Parul Gandhi & Contrast by Parth</div>
+      <div class="project-desc">Shot and created content for high-fashion label Parul Gandhi — including end-of-season sale campaigns. Also designed promotional stories and posts for Contrast by Parth, a luxury fashion brand.</div>
+      <a href="https://www.instagram.com/reel/DOdrVlmErGp/" target="_blank" class="project-link">Watch Reel →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">04</div>
+      <div class="project-type">Brand Building</div>
+      <div class="project-name">Swavi — Jewellery Brand</div>
+      <div class="project-desc">Co-founded an artificial jewellery brand from the ground up — brand identity, visual language, product direction, and client partnerships. Built and launched a business while in college.</div>
+      <a href="https://www.instagram.com/swavi.co/" target="_blank" class="project-link">View Brand →</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">05</div>
+      <div class="project-type">Social Media Management</div>
+      <div class="project-name">International Education Boutique</div>
+      <div class="project-desc">Managed full social media operations for IEB — from content planning and visual design to student webinar coordination. Ensured consistent brand communication and grew digital presence.</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">06</div>
+      <div class="project-type">Business Development</div>
+      <div class="project-name">DuBeat — Delhi University Media</div>
+      <div class="project-desc">Assisted in pitching advertising solutions to clients, building relationships, and bridging the gap between client needs and the content/design team. Contributed to expanding brand partnerships across campus.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATION -->
+<section id="publication">
+  <div class="pub-inner">
+    <div class="pub-text reveal">
+      <p class="section-label">Featured Publication</p>
+      <h2 class="section-title">In <em>Her Honour</em></h2>
+      <p class="pub-desc">A women-centric magazine I co-created with Rtr. Mahi Azad for the Rotaract Club of Delhi Genesis — a Mother's Day special edition celebrating women in Rotary leadership. I wrote the editorial, designed the layout, and helped feature the stories of 7 senior Rotarian leaders from District 3011.</p>
+      <p class="pub-desc">This is Volume I. There will be more.</p>
+      <div class="pub-quote">"There is something quietly radical about deciding that the women around you deserve to be seen."</div>
+    </div>
+    <div class="pub-visual reveal">
+      <div class="pub-title-big">Heart Behind<br>The Wheel</div>
+      <div class="pub-divider"></div>
+      <div class="pub-subtitle">In Her Honour — Volume I</div>
+      <div class="pub-divider"></div>
+      <div style="font-size:0.75rem;color:rgba(245,240,232,0.4);letter-spacing:0.1em;line-height:1.8;">
+        Rotaract Club of Delhi Genesis<br>
+        Mother's Day Special Edition<br>
+        Rotary International District 3011
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label reveal">Recognition</p>
+  <h2 class="section-title reveal">Achievements &<br><em>Memberships</em></h2>
+  <div class="ach-grid">
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">🌐</div>
+      <div>
+        <div class="ach-title">Global UGRAD Scholarship</div>
+        <div class="ach-desc">Selected for a fully funded 6-month community scholarship in the USA by the U.S. Embassy — among 300 students from around the world.</div>
+      </div>
+    </div>
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">🌏</div>
+      <div>
+        <div class="ach-title">Youth South Asian Leaders Initiative (YSALI)</div>
+        <div class="ach-desc">Selected member working on leadership and civic engagement across South Asia under the UN Foundation's Girl Up programme.</div>
+      </div>
+    </div>
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">🎓</div>
+      <div>
+        <div class="ach-title">WISCI Alumni — Girl Up, United Nations</div>
+        <div class="ach-desc">Collaborated with global peers on innovation and leadership projects as one of a few participants selected from India.</div>
+      </div>
+    </div>
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">🤖</div>
+      <div>
+        <div class="ach-title">AI Advantage Course — Ankur Warikoo</div>
+        <div class="ach-desc">Completed WebVeda's AI Advantage course, gaining practical knowledge of AI tools and real-world applications in marketing and content.</div>
+      </div>
+    </div>
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">🏫</div>
+      <div>
+        <div class="ach-title">Discipline Captain — Delhi Public School, Dehradun</div>
+        <div class="ach-desc">School council leadership role. Core organiser of Vividhanjali for 2 years and multiple school events; filmed student documentaries. Graduated with 96% GPA.</div>
+      </div>
+    </div>
+    <div class="ach-item reveal">
+      <div class="ach-icon-wrap">📋</div>
+      <div>
+        <div class="ach-title">Member — Commerce Society Excelsior & Marketrics</div>
+        <div class="ach-desc">Active member of Maitreyi College's Commerce Society Excelsior and the Content & Graphics Department at Marketing Society Marketrics.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="contact-eyebrow">Let's Work Together</p>
+  <h2 class="contact-heading">Open to<br><em>Opportunities</em></h2>
+  <p class="contact-sub">Looking for internships, freelance collaborations, and creative projects in marketing, design, and content.</p>
+  <div class="contact-links">
+    <a href="mailto:swadhagoswami2007@gmail.com" class="contact-link">
+      <span class="contact-link-label">Email</span>
+      <span class="contact-link-value">swadhagoswami2007@gmail.com</span>
+    </a>
+    <a href="https://www.linkedin.com/in/swadha-goswami-713a082b3" target="_blank" class="contact-link">
+      <span class="contact-link-label">LinkedIn</span>
+      <span class="contact-link-value">swadha-goswami</span>
+    </a>
+    <a href="https://www.instagram.com/swadhagoswami16/" target="_blank" class="contact-link">
+      <span class="contact-link-label">Instagram</span>
+      <span class="contact-link-value">@swadhagoswami16</span>
+    </a>
+    <a href="tel:+919759533433" class="contact-link">
+      <span class="contact-link-label">Phone</span>
+      <span class="contact-link-value">+91 97595 33433</span>
+    </a>
+  </div>
+  <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.2);">
+    New Delhi, India · B.Com (Hons), Maitreyi College, University of Delhi
+  </div>
+</section>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger sibling reveals
+  document.querySelectorAll('.projects-grid, .exp-grid, .ach-grid').forEach(grid => {
+    const children = grid.querySelectorAll('.reveal');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+</script>
+</body>
+</html>
